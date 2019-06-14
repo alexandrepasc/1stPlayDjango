@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container">
+    {% include 'navbar.html' %}
     <ol class="breadcrumb my-4">
         <li class="breadcrumb-item active">Boards</li>
     </ol>
@@ -25,7 +26,7 @@
         {% for board in boards %}
         <tr>
             <td>
-                {{ board.name }}<br>
+                <a href="{% url 'board_topics' board.id%}">{{ board.name }}</a><br>
                 <small class="text-muted d-block">{{ board.description }}</small>
             </td>
             <td class="align-middle">0</td>
