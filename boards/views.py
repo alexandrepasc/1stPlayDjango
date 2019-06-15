@@ -30,3 +30,10 @@ def about(request):
 
     return render(request, 'about.html')
 
+def new_topic(request, pk):
+    board = get_object_or_404(Board, pk=pk)
+
+    setattr(request, 'view', 'newTopic')
+
+    return render(request, 'newTopic.html', {'board': board})
+
