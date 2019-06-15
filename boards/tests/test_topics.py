@@ -1,13 +1,15 @@
 from django.urls import reverse, resolve
 from django.test import TestCase
 
-from boards.models import Board
+from boards.models import Board, Topic, User
 
 
 class TestUrls(TestCase):
 
     def setUp(self):
+        User.objects.create_user(username='test', email='', password='')
         Board.objects.create(name='Django', description='Django board.')
+        Topic.objects.create(subject='test1', board=Board.objects.get(id=1), starter=User.objects.get(username='test'))
         Board.objects.create(name='Python', description='Python board.')
 
     def test_board_topics_url(self):
@@ -23,3 +25,19 @@ class TestUrls(TestCase):
         path = reverse('board_topics', args=[99])
         response = self.client.get(path)
         assert response.status_code == 404
+
+    def test_board_topics_new_topic_button(self):
+        path = reverse('board_topics', args=[1])
+        response = self.client.get(path)
+        self.assertContains(response, 'href="/board/1/new/"'.format(path))
+
+    def test_board_topics_new_topic_button_fail(self):
+        path = reverse('board_topics', args=[2])
+        response = self.client.get(path)
+        self.assertNotContains(response, 'href="/board/1/new/"'.format(path))
+
+    def test_board_topics_list(self):
+        path = reverse('board_topics', args=[1])
+        response = self.client.get(path)
+        self.assertContains(response, '<td>test1</td>'.format(path))
+        self.assertContains(response, '<td>test</td>'.format(path))
