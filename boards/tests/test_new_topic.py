@@ -1,14 +1,14 @@
 from django.urls import reverse, resolve
 from django.test import TestCase
 
-from boards.models import Board
+from boards.models import Board, Post, Topic, User
+from .utils import add_data
 
 
 class TestNewTopic(TestCase):
 
     def setUp(self):
-        Board.objects.create(name='Django', description='Django board.')
-        Board.objects.create(name='Python', description='Python board.')
+        add_data()
 
     def test_new_topic_url(self):
         path = reverse('new_topic', args=[1])
@@ -33,3 +33,23 @@ class TestNewTopic(TestCase):
         path = reverse('new_topic', args=[2])
         response = self.client.get(path)
         self.assertNotContains(response, 'formaction="/board/1"'.format(path))
+
+    def test_csrf(self):
+        path = reverse('new_topic', args=[1])
+        response = self.client.get(path)
+        self.assertContains(response, 'csrfmiddlewaretoken')
+
+    def test_new_topic(self):
+        path = reverse('new_topic', args=[1])
+        data = {
+            'subject': 'title',
+            'message': 'description'
+        }
+        response = self.client.post(path, data)
+        self.assertTrue(Topic.objects.exists())
+        self.assertTrue(Post.objects.exists())
+
+    #def test_new_topic_fail(self):
+        #path = reverse('new_topic', args=[1])
+        #response = self.client.post(path, {})
+        #self.assertEquals(response.status_code, 200)

@@ -1,14 +1,13 @@
 from django.urls import reverse, resolve
 from django.test import TestCase
 
-from boards.models import Board
+from .utils import add_just_board_data
 
 
 class TestUrls(TestCase):
 
     def setUp(self):
-        Board.objects.create(name='Django', description='Django board.')
-        Board.objects.create(name='Python', description='Python board.')
+        add_just_board_data()
 
     def test_about_topic_connection(self):
         path = reverse('about')
