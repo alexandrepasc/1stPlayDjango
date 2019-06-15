@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from .models import Board
 
 def home(request):
@@ -13,13 +12,21 @@ def home(request):
     #return HttpResponse(response_html)
 
     boards = Board.objects.all()
+
+    setattr(request, 'view', 'home')
+
     return render(request, 'home.html', {'boards': boards})
 
 def board_topics(request, pk):
     board = get_object_or_404(Board, pk=pk)
+
+    setattr(request, 'view', 'topics')
+
     return render(request, 'topics.html', {'board': board})
 
 def about(request):
-    response_html = 'about'
-    return HttpResponse(response_html)
+
+    setattr(request, 'view', 'about')
+
+    return render(request, 'about.html')
 

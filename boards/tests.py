@@ -31,3 +31,9 @@ class TestUrls(TestCase):
         path = reverse('board_topics', args=[99])
         response = self.client.get(path)
         assert response.status_code == 404
+
+    def test_about_topic_connection(self):
+        url = reverse('about')
+        self.response = self.client.get(url)
+        #self.assertContains(self.response, 'href="/"'.format('about/'))
+        self.assertNotContains(self.response, 'href="/board/1"'.format('about/'))
