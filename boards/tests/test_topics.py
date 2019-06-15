@@ -1,16 +1,13 @@
 from django.urls import reverse, resolve
 from django.test import TestCase
 
-from boards.models import Board, Topic, User
+from .utils import add_data
 
 
 class TestUrls(TestCase):
 
     def setUp(self):
-        User.objects.create_user(username='test', email='', password='')
-        Board.objects.create(name='Django', description='Django board.')
-        Topic.objects.create(subject='test1', board=Board.objects.get(id=1), starter=User.objects.get(username='test'))
-        Board.objects.create(name='Python', description='Python board.')
+        add_data()
 
     def test_board_topics_url(self):
         path = reverse('board_topics', args=[1])
