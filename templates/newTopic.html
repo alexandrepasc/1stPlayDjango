@@ -9,3 +9,13 @@
   <li class="breadcrumb-item">{{ board.name }}</li>
   <li class="breadcrumb-item active">New topic</li>
 {% endblock %}
+
+{% block content %}
+<table class="table" width="100%">
+    <thead class="thead-inverse">
+    <tr align="right">
+        <th><a class="btn btn-info" href="{% url 'board_topics' board.id%}">Cancel</a></th>
+    </tr>
+    </thead>
+</table>
+{% endblock %}
