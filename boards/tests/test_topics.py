@@ -1,22 +1,14 @@
 from django.urls import reverse, resolve
 from django.test import TestCase
 
-from .models import Board
+from boards.models import Board
 
 
 class TestUrls(TestCase):
 
     def setUp(self):
         Board.objects.create(name='Django', description='Django board.')
-
-    def test_home_url(self):
-        path = reverse('home')
-        assert resolve(path).view_name == 'home'
-
-    def test_home_status(self):
-        path = reverse('home')
-        response = self.client.get(path)
-        assert response.status_code == 200
+        Board.objects.create(name='Python', description='Python board.')
 
     def test_board_topics_url(self):
         path = reverse('board_topics', args=[1])
@@ -31,9 +23,3 @@ class TestUrls(TestCase):
         path = reverse('board_topics', args=[99])
         response = self.client.get(path)
         assert response.status_code == 404
-
-    def test_about_topic_connection(self):
-        url = reverse('about')
-        self.response = self.client.get(url)
-        #self.assertContains(self.response, 'href="/"'.format('about/'))
-        self.assertNotContains(self.response, 'href="/board/1"'.format('about/'))
