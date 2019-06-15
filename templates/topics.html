@@ -10,4 +10,11 @@
 {% endblock %}
 
 {% block content %}
+<table class="table" width="100%">
+    <thead class="thead-inverse">
+    <tr align="right">
+        <th><a class="btn btn-info" href="{% url 'new_topic' board.id%}">New topic</a></th>
+    </tr>
+    </thead>
+</table>
 {% endblock %}
