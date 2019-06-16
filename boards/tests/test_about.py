@@ -14,3 +14,9 @@ class TestUrls(TestCase):
         response = self.client.get(path)
         # self.assertContains(self.response, 'href="/"'.format('about/'))
         self.assertNotContains(response, 'href="/board/1"'.format('about/'))
+
+    def test_signup_button(self):
+        path = reverse('about')
+        signup = reverse('signup')
+        response = self.client.get(path)
+        self.assertContains(response, 'href="' + signup + '"'.format(path))

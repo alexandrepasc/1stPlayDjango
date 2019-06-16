@@ -12,3 +12,9 @@ class TestUrls(TestCase):
         path = reverse('home')
         response = self.client.get(path)
         assert response.status_code == 200
+
+    def test_signup_button(self):
+        path = reverse('home')
+        signup = reverse('signup')
+        response = self.client.get(path)
+        self.assertContains(response, 'href="' + signup + '"'.format(path))

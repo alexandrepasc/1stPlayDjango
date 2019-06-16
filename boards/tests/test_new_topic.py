@@ -27,12 +27,12 @@ class TestNewTopic(TestCase):
     def test_new_topic_cancel(self):
         path = reverse('new_topic', args=[1])
         response = self.client.get(path)
-        self.assertContains(response, 'formaction="/board/1"'.format(path))
+        self.assertContains(response, 'formaction="/board/1/"'.format(path))
 
     def test_new_topic_cancel_fail(self):
         path = reverse('new_topic', args=[2])
         response = self.client.get(path)
-        self.assertNotContains(response, 'formaction="/board/1"'.format(path))
+        self.assertNotContains(response, 'formaction="/board/1/"'.format(path))
 
     def test_csrf(self):
         path = reverse('new_topic', args=[1])
@@ -53,3 +53,9 @@ class TestNewTopic(TestCase):
         path = reverse('new_topic', args=[1])
         response = self.client.post(path, {})
         self.assertEquals(response.status_code, 200)
+
+    def test_signup_button(self):
+        path = reverse('new_topic', args=[1])
+        signup = reverse('signup')
+        response = self.client.get(path)
+        self.assertContains(response, 'href="' + signup + '"'.format(path))

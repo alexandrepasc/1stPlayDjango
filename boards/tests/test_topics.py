@@ -38,3 +38,9 @@ class TestUrls(TestCase):
         response = self.client.get(path)
         self.assertContains(response, '<td>test1</td>'.format(path))
         self.assertContains(response, '<td>test</td>'.format(path))
+
+    def test_signup_button(self):
+        path = reverse('board_topics', args=[1])
+        signup = reverse('signup')
+        response = self.client.get(path)
+        self.assertContains(response, 'href="' + signup + '"'.format(path))
