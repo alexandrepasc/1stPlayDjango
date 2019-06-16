@@ -1,9 +1,13 @@
-<table class="nav justify-content-center">
+<table class="nav">
     <tr class="nav-item">
         <th><a class="nav-link
             {% if request.view == 'home' %} disabled" {% else %} active" href="{% url 'home' %}" {% endif %}
             {% if request.view == 'home' %} aria-disabled="true" tabindex="-1" {% endif %}
             >Home</a></th>
+        <th><a class="nav-link
+            {% if request.view == 'signup' %} disabled" {% else %} active" href="{% url 'signup' %}" {% endif %}
+            {% if request.view == 'signup' %} aria-disabled="true" tabindex="-1" {% endif %}
+            >Sign up</a></th>
         <th><a class="nav-link
             {% if request.view == 'about' %} disabled" {% else %} active" href="{% url 'about' %}" {% endif %}
             {% if request.view == 'about' %} aria-disabled="true" tabindex="-1" {% endif %}
