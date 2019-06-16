@@ -1,16 +1,23 @@
-<table class="nav">
-    <tr class="nav-item">
-        <th><a class="nav-link
-            {% if request.view == 'home' %} disabled" {% else %} active" href="{% url 'home' %}" {% endif %}
-            {% if request.view == 'home' %} aria-disabled="true" tabindex="-1" {% endif %}
-            >Home</a></th>
-        <th><a class="nav-link
-            {% if request.view == 'signup' %} disabled" {% else %} active" href="{% url 'signup' %}" {% endif %}
-            {% if request.view == 'signup' %} aria-disabled="true" tabindex="-1" {% endif %}
-            >Sign up</a></th>
-        <th><a class="nav-link
-            {% if request.view == 'about' %} disabled" {% else %} active" href="{% url 'about' %}" {% endif %}
-            {% if request.view == 'about' %} aria-disabled="true" tabindex="-1" {% endif %}
-            >About</a></th>
-    </tr>
-</table>
+<table width="100%"><tr><th>
+        <table class="nav">
+            <tr class="nav-item">
+                <th><a class="nav-link
+                    {% if request.view == 'home' %} disabled" {% else %} active" href="{% url 'home' %}" {% endif %}
+                    {% if request.view == 'home' %} aria-disabled="true" tabindex="-1" {% endif %}
+                    >Home</a></th>
+                <th><a class="nav-link
+                    {% if request.view == 'about' %} disabled" {% else %} active" href="{% url 'about' %}" {% endif %}
+                    {% if request.view == 'about' %} aria-disabled="true" tabindex="-1" {% endif %}
+                    >About</a></th>
+            </tr>
+        </table>
+    </th><th width="50%">&nbsp;</th><th align="right">
+        <table class="nav">
+            <tr class="nav-item">
+                <th><a class="nav-link
+                    {% if request.view == 'signup' %} disabled" {% else %} active" href="{% url 'signup' %}" {% endif %}
+                    {% if request.view == 'signup' %} aria-disabled="true" tabindex="-1" {% endif %}
+                    >Sign up</a></th>
+            </tr>
+        </table>
+</th></tr></table>
