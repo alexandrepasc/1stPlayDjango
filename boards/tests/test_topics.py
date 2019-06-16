@@ -5,17 +5,16 @@ from .utils import add_data
 
 
 class TestUrls(TestCase):
+    path = reverse('board_topics', args=[1])
 
     def setUp(self):
         add_data()
 
     def test_board_topics_url(self):
-        path = reverse('board_topics', args=[1])
-        assert resolve(path).view_name == 'board_topics'
+        assert resolve(self.path).view_name == 'board_topics'
 
     def test_board_topics_status(self):
-        path = reverse('board_topics', args=[1])
-        response = self.client.get(path)
+        response = self.client.get(self.path)
         assert response.status_code == 200
 
     def test_board_topics_status_fail(self):
@@ -24,9 +23,8 @@ class TestUrls(TestCase):
         assert response.status_code == 404
 
     def test_board_topics_new_topic_button(self):
-        path = reverse('board_topics', args=[1])
-        response = self.client.get(path)
-        self.assertContains(response, 'href="/board/1/new/"'.format(path))
+        response = self.client.get(self.path)
+        self.assertContains(response, 'href="/board/1/new/"'.format(self.path))
 
     def test_board_topics_new_topic_button_fail(self):
         path = reverse('board_topics', args=[2])
@@ -34,13 +32,11 @@ class TestUrls(TestCase):
         self.assertNotContains(response, 'href="/board/1/new/"'.format(path))
 
     def test_board_topics_list(self):
-        path = reverse('board_topics', args=[1])
         response = self.client.get(path)
-        self.assertContains(response, '<td>test1</td>'.format(path))
-        self.assertContains(response, '<td>test</td>'.format(path))
+        self.assertContains(response, '<td>test1</td>'.format(self.path))
+        self.assertContains(response, '<td>test</td>'.format(self.path))
 
     def test_signup_button(self):
-        path = reverse('board_topics', args=[1])
         signup = reverse('signup')
-        response = self.client.get(path)
-        self.assertContains(response, 'href="' + signup + '"'.format(path))
+        response = self.client.get(self.path)
+        self.assertContains(response, 'href="' + signup + '"'.format(self.path))
