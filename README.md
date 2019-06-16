@@ -16,3 +16,6 @@ python manage.py test <br>
 python manage.py makemigrations <br>
 python manage.py migrate <br>
 python manage.py sqlmigrate boards 0001 <br>
+<br>
+pip install django-widget-tweaks <br>
+Or use IDE to install it. <br>
