@@ -18,10 +18,7 @@
             <form method="post" novalidate>
                 {% csrf_token %}
                 {% include 'include/form.html' %}
-                <div style="float: left;">
-                    <button type="submit" class="btn btn-success">Post</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
+                {% include 'include/normalFormButtons.html' %}
                 <div style="float: right;">
                     <button type="submit" class="btn btn-danger"
                             formaction="{% url 'board_topics' board.id%}">Cancel

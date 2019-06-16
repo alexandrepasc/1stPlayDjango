@@ -42,6 +42,7 @@ def new_topic(request, pk):
     user = User.objects.first()
 
     setattr(request, 'view', 'newTopic')
+    setattr(request, 'submitName', 'Post')
 
     form = NewTopicForm(request.POST)
 
