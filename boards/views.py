@@ -47,9 +47,8 @@ def new_topic(request, pk):
     setattr(request, 'view', 'newTopic')
     setattr(request, 'breadcrumb', 'New Topic')
 
-    form = NewTopicForm(request.POST)
-
     if request.method == 'POST':
+        form = NewTopicForm(request.POST)
 
         if form.is_valid():
 
@@ -65,7 +64,7 @@ def new_topic(request, pk):
 
             return redirect('board_topics', pk=board.pk)
 
-        else:
-            form = NewTopicForm
+    else:
+        form = NewTopicForm()
 
     return render(request, 'newTopic.html', {'board': board, 'form': form})
