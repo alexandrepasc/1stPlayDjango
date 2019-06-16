@@ -12,6 +12,8 @@ django-admin startapp accounts <br>
 python manage.py runserver <br>
 python manage.py shell <br>
 python manage.py test <br>
+python manage.py test -v 2 <br>
+Set the verbose to test run. <br>
 <br>
 python manage.py makemigrations <br>
 python manage.py migrate <br>
