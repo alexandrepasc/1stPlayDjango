@@ -9,5 +9,14 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Sign up</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% include 'include/form.html' %}
+        {% include 'include/normalFormButtons.html' %}
+        <div style="float: right;">
+            <button type="submit" class="btn btn-danger"
+                    formaction="{% url 'home' %}">Cancel
+            </button>
+        </div>
+    </form>
 {% endblock %}
