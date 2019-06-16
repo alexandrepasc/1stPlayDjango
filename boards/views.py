@@ -18,6 +18,7 @@ def home(request):
     boards = Board.objects.all()
 
     setattr(request, 'view', 'home')
+    setattr(request, 'breadcrumb', 'Home')
 
     return render(request, 'home.html', {'boards': boards})
 
@@ -26,12 +27,14 @@ def board_topics(request, pk):
     board = get_object_or_404(Board, pk=pk)
 
     setattr(request, 'view', 'topics')
+    setattr(request, 'breadcrumb', 'Topics')
 
     return render(request, 'topics.html', {'board': board})
 
 
 def about(request):
     setattr(request, 'view', 'about')
+    setattr(request, 'breadcrumb', 'About')
 
     return render(request, 'about.html')
 
@@ -42,6 +45,7 @@ def new_topic(request, pk):
     user = User.objects.first()
 
     setattr(request, 'view', 'newTopic')
+    setattr(request, 'breadcrumb', 'New Topic')
 
     form = NewTopicForm(request.POST)
 
