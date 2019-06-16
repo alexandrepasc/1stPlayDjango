@@ -49,7 +49,7 @@ class TestNewTopic(TestCase):
         self.assertTrue(Topic.objects.exists())
         self.assertTrue(Post.objects.exists())
 
-    #def test_new_topic_fail(self):
-        #path = reverse('new_topic', args=[1])
-        #response = self.client.post(path, {})
-        #self.assertEquals(response.status_code, 200)
+    def test_new_topic_fail(self):
+        path = reverse('new_topic', args=[1])
+        response = self.client.post(path, {})
+        self.assertEquals(response.status_code, 200)
