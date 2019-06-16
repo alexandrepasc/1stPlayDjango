@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     path('admin/', admin.site.urls),
     url(r'^board/(?P<pk>\d+)$', views.board_topics, name='board_topics'),
+    url(r'^board/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
     url(r'^about/$', views.about, name='about'),
     url(r'^board/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic')
 ]
