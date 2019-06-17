@@ -15,7 +15,7 @@
         <table class="nav">
             <tr class="nav-item">
                 {% if user.is_authenticated %}
-                <th><a class="nav-link" href="#">{{ user.username }}</a></th>
+                <th>{% include 'include/userMenu.html' %}</th>
                 {% else %}
                 <th><a class="nav-link
                     {% if request.view == 'signup' %} disabled" {% else %} active" href="{% url 'signup' %}" {% endif %}
