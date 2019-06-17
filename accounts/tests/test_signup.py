@@ -39,6 +39,7 @@ class TestSignUp(TestCase):
         form = response.context.get('form')
         self.assertTrue(form.errors)
 
+    # TODO: Correct the next 2 tests
     # def test_form_with_input_url(self):
     #     data = {
     #         'username': 'test',
