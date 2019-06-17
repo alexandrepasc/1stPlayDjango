@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 {{ request.breadcrumb }}
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
 {% endblock %}
 
 {% block breadcrumb %}
