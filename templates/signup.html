@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ request.breadcrumb }}
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">{{ request.breadcrumb }}</li>
+{% endblock %}
+
+{% block content %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% include 'include/form.html' %}
+        {% include 'include/normalFormButtons.html' %}
+        <div style="float: right;">
+            <button type="submit" class="btn btn-danger"
+                    formaction="{% url 'home' %}">Cancel
+            </button>
+        </div>
+    </form>
+{% endblock %}
