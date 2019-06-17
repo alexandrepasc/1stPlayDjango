@@ -45,11 +45,8 @@ def new_topic(request, pk):
     user = User.objects.first()
 
     setattr(request, 'view', 'newTopic')
-<<<<<<< HEAD
     setattr(request, 'breadcrumb', 'New Topic')
-=======
     setattr(request, 'submitName', 'Post')
->>>>>>> feature/sign_up
 
     if request.method == 'POST':
         form = NewTopicForm(request.POST)
