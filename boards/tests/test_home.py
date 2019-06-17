@@ -3,12 +3,16 @@ from django.test import TestCase
 
 
 class TestUrls(TestCase):
+    path = reverse('home')
 
     def test_home_url(self):
-        path = reverse('home')
-        assert resolve(path).view_name == 'home'
+        assert resolve(self.path).view_name == 'home'
 
     def test_home_status(self):
-        path = reverse('home')
-        response = self.client.get(path)
+        response = self.client.get(self.path)
         assert response.status_code == 200
+
+    def test_signup_button(self):
+        signup = reverse('signup')
+        response = self.client.get(self.path)
+        self.assertContains(response, 'href="' + signup + '"'.format(self.path))

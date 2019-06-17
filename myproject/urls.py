@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 
+from accounts import views as accounts_views
 from boards import views
 
 urlpatterns = [
@@ -25,5 +26,6 @@ urlpatterns = [
     url(r'^board/(?P<pk>\d+)$', views.board_topics, name='board_topics'),
     url(r'^board/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
     url(r'^about/$', views.about, name='about'),
-    url(r'^board/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic')
+    url(r'^board/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
+    url(r'^signup/$', accounts_views.signup, name='signup'),
 ]

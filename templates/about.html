@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-About
+{{ request.breadcrumb }}
 {% endblock %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item active">About</li>
+<li class="breadcrumb-item active">{{ request.breadcrumb }}</li>
 {% endblock %}
 
 {% block content %}

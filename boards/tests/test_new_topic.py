@@ -6,17 +6,16 @@ from .utils import add_data
 
 
 class TestNewTopic(TestCase):
+    path = reverse('new_topic', args=[1])
 
     def setUp(self):
         add_data()
 
     def test_new_topic_url(self):
-        path = reverse('new_topic', args=[1])
-        assert resolve(path).view_name == 'new_topic'
+        assert resolve(self.path).view_name == 'new_topic'
 
     def test_new_topic_status(self):
-        path = reverse('new_topic', args=[1])
-        response = self.client.get(path)
+        response = self.client.get(self.path)
         assert response.status_code == 200
 
     def test_new_topic_status_fail(self):
@@ -25,31 +24,32 @@ class TestNewTopic(TestCase):
         assert response.status_code == 404
 
     def test_new_topic_cancel(self):
-        path = reverse('new_topic', args=[1])
-        response = self.client.get(path)
-        self.assertContains(response, 'formaction="/board/1"'.format(path))
+        response = self.client.get(self.path)
+        self.assertContains(response, 'formaction="/board/1/"'.format(self.path))
 
     def test_new_topic_cancel_fail(self):
         path = reverse('new_topic', args=[2])
         response = self.client.get(path)
-        self.assertNotContains(response, 'formaction="/board/1"'.format(path))
+        self.assertNotContains(response, 'formaction="/board/1/"'.format(path))
 
     def test_csrf(self):
-        path = reverse('new_topic', args=[1])
-        response = self.client.get(path)
+        response = self.client.get(self.path)
         self.assertContains(response, 'csrfmiddlewaretoken')
 
     def test_new_topic(self):
-        path = reverse('new_topic', args=[1])
         data = {
             'subject': 'title',
             'message': 'description'
         }
-        response = self.client.post(path, data)
+        response = self.client.post(self.path, data)
         self.assertTrue(Topic.objects.exists())
         self.assertTrue(Post.objects.exists())
 
     def test_new_topic_fail(self):
-        path = reverse('new_topic', args=[1])
-        response = self.client.post(path, {})
+        response = self.client.post(self.path, {})
         self.assertEquals(response.status_code, 200)
+
+    def test_signup_button(self):
+        signup = reverse('signup')
+        response = self.client.get(self.path)
+        self.assertContains(response, 'href="' + signup + '"'.format(self.path))

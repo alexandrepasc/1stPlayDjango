@@ -18,6 +18,7 @@ def home(request):
     boards = Board.objects.all()
 
     setattr(request, 'view', 'home')
+    setattr(request, 'breadcrumb', 'Home')
 
     return render(request, 'home.html', {'boards': boards})
 
@@ -26,12 +27,14 @@ def board_topics(request, pk):
     board = get_object_or_404(Board, pk=pk)
 
     setattr(request, 'view', 'topics')
+    setattr(request, 'breadcrumb', 'Topics')
 
     return render(request, 'topics.html', {'board': board})
 
 
 def about(request):
     setattr(request, 'view', 'about')
+    setattr(request, 'breadcrumb', 'About')
 
     return render(request, 'about.html')
 
@@ -42,10 +45,11 @@ def new_topic(request, pk):
     user = User.objects.first()
 
     setattr(request, 'view', 'newTopic')
-
-    form = NewTopicForm(request.POST)
+    setattr(request, 'breadcrumb', 'New Topic')
+    setattr(request, 'submitName', 'Post')
 
     if request.method == 'POST':
+        form = NewTopicForm(request.POST)
 
         if form.is_valid():
 
@@ -61,7 +65,7 @@ def new_topic(request, pk):
 
             return redirect('board_topics', pk=board.pk)
 
-        else:
-            form = NewTopicForm
+    else:
+        form = NewTopicForm()
 
     return render(request, 'newTopic.html', {'board': board, 'form': form})
