@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^board/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
     url(r'^about/$', views.about, name='about'),
     url(r'^board/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
+    url(r'^topic/(?P<pk>\d+)$', views.topic_, name='topic_'),
+    url(r'^topic/(?P<pk>\d+)/$', views.topic_, name='topic_'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
 ]

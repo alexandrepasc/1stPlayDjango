@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ topic.subject }}
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item">Boards</li>
+<li class="breadcrumb-item"><a href="{% url 'board_topics' board.id %}">{{ board.name }}</a></li>
+<li class="breadcrumb-item active">{{ topic.subject }}</li>
+{% endblock %}
+
+{% block content %}
+<table class="table" width="100%">
+    <thead class="thead-inverse">
+    <tr>
+        <th>{{ topic.subject }}</th>
+    </tr>
+    {% for post in topic.posts %}
+    <tr>
+    </tr>
+    {% endfor %}
+    </thead>
+</table>
+{% endblock %}
