@@ -1,4 +1,15 @@
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-       aria-expanded="false">{{ user.username }}</a>
-</li>
+<script type="text/javascript" src="static/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {{ user.username }}
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="nav-link disabled"  aria-haspopup="true" aria-expanded="false" href="#">Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="nav-link disabled"  aria-haspopup="true" aria-expanded="false" href="#">Logout</a>
+    </div>
+</div>
