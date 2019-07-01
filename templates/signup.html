@@ -15,17 +15,19 @@
 {% endblock %}
 
 {% block content %}
-<form method="post" novalidate>
-    {% csrf_token %}
-    {% include 'include/form.html' %}
-    {% include 'include/normalFormButtons.html' %}
-    <div style="float: right;">
-        <button type="submit" class="btn btn-danger"
-                formaction="{% url 'home' %}">Cancel
-        </button>
+<div class="card">
+    <div class="card-body">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'include/form.html' %}
+            {% include 'include/normalFormButtons.html' %}
+            <div style="float: right;">
+                <button type="submit" class="btn btn-danger" formaction="{% url 'home' %}">Cancel</button>
+            </div>
+        </form>
     </div>
-</form>
-<div class="card-footer text-muted text-center">
-    Already have an account? <a href="#">Log in</a>
+    <div class="card-footer text-muted text-center">
+        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </div>
 </div>
 {% endblock %}
