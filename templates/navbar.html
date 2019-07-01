@@ -17,6 +17,12 @@
                 {% if user.is_authenticated %}
                 <th>{% include 'include/userMenu.html' %}</th>
                 {% else %}
+                <th>
+                    <a class="nav-link
+                    {% if request.view == 'login' %} disabled" {% else %} active" href="{% url 'login' %}" {% endif %}
+                    {% if request.view == 'login' %} aria-disabled="true" tabindex="-1" {% endif %}
+                    >Log in</a>
+                </th>
                 <th><a class="nav-link
                     {% if request.view == 'signup' %} disabled" {% else %} active" href="{% url 'signup' %}" {% endif %}
                     {% if request.view == 'signup' %} aria-disabled="true" tabindex="-1" {% endif %}
