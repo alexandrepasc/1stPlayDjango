@@ -9,16 +9,19 @@
     {% block stylesheet %}{% endblock %}
 </head>
 <body>
-    {% block body %}
-        <div class="container">
-            {% include 'navbar.html' %}
-            <ol class="breadcrumb my-4">
-                {% block breadcrumb %}
-                {% endblock %}
-            </ol>
-            {% block content %}
-            {% endblock %}
-        </div>
-    {% endblock body %}
+{% block body %}
+<div class="container">
+    {% include 'navbar.html' %}
+    <ol class="breadcrumb my-4">
+        {% block breadcrumb %}
+        {% endblock %}
+    </ol>
+    {% block content %}
+    {% endblock %}
+</div>
+{% endblock body %}
+<script type="text/javascript" src="static/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 </body>
 </html>
