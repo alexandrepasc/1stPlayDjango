@@ -1,6 +1,8 @@
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.urls import reverse, resolve
 
 from .forms import SignUpForm, SignInForm
 
@@ -34,21 +36,19 @@ def signin(request):
 
         username = request.POST['username']
         password = request.POST['password']
+
+        nexturl = request.GET['next'] if 'next' in request.GET else ''
+
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             auth_login(request, user)
-            return redirect('home')
 
-        # if form.is_valid():
-        #     username = request.POST['username']
-        #     password = request.POST['password']
-        #     print("-----------------------------------------")
-        #     user = authenticate(request, username=username, password=password)
-        #
-        #     if user is not None:
-        #         auth_login(request, user)
-        #         return redirect('home')
+            if nexturl is not '':
+                return redirect(nexturl)
+            else:
+                return redirect('home')
+
     else:
         form = SignInForm()
 
