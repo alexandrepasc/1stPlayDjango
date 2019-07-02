@@ -23,6 +23,7 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+#TODO: don't return error to page
 def signin(request):
     setattr(request, 'view', 'login')
     setattr(request, 'breadcrumb', 'Log in')
