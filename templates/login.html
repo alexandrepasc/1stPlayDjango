@@ -2,8 +2,16 @@
 
 {% load static %}
 
+{% block title %}
+{{ request.breadcrumb }}
+{% endblock %}
+
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">{{ request.breadcrumb }}</li>
 {% endblock %}
 
 {% block content %}

@@ -12,6 +12,9 @@ class SignUpForm(UserCreationForm):
 
 
 class SignInForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'validate', 'placeholder': 'Name'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+
     class Meta:
         model = User
         fields = ('username', 'password')
