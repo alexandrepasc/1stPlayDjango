@@ -2,16 +2,8 @@
 
 {% load static %}
 
-{% block title %}
-{{ request.breadcrumb }}
-{% endblock %}
-
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
-{% endblock %}
-
-{% block breadcrumb %}
-<li class="breadcrumb-item active">{{ request.breadcrumb }}</li>
 {% endblock %}
 
 {% block content %}
@@ -24,10 +16,16 @@
             <div style="float: right;">
                 <button type="submit" class="btn btn-danger" formaction="{% url 'home' %}">Cancel</button>
             </div>
+
         </form>
     </div>
     <div class="card-footer text-muted text-center">
-        Already have an account? <a href="{% url 'login' %}">Log in</a>
+        New to Django Boards? <a href="{% url 'signup' %}">Sign up</a>
     </div>
+</div>
+<div class="text-center py-2">
+    <small>
+        <a href="#" class="text-muted">Forgot your password?</a>
+    </small>
 </div>
 {% endblock %}

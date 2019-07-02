@@ -52,7 +52,6 @@ def new_topic(request, pk):
         form = NewTopicForm(request.POST)
 
         if form.is_valid():
-
             topic = form.save(commit=False)
             topic.board = board
             topic.starter = user
@@ -69,3 +68,15 @@ def new_topic(request, pk):
         form = NewTopicForm()
 
     return render(request, 'newTopic.html', {'board': board, 'form': form})
+
+
+def topic_(request, pk):
+    topic = get_object_or_404(Topic, pk=pk)
+
+    posts = topic.pk
+
+    board = topic.board
+
+    setattr(request, 'view', 'topic')
+
+    return render(request, 'topic.html', {'posts': posts, 'topic': topic, 'board': board})
