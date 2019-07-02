@@ -18,6 +18,8 @@
 <div class="card">
     <div class="card-body">
         <form method="post" novalidate>
+            {% block hidden %}
+            {% endblock %}
             {% csrf_token %}
             {% include 'include/form.html' %}
             {% include 'include/normalFormButtons.html' %}
