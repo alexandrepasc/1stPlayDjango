@@ -1,10 +1,15 @@
 {% extends 'base_account.html' %}
 
+{% block hidden %}
+<input type="hidden" name="next" value="{{ next }}">
+{% endblock %}
+
 {% block footer %}
 <div class="card-footer text-muted text-center">
     New to Django Boards? <a href="{% url 'signup' %}">Sign up</a>
 </div>
 {% endblock %}
+
 {% block muted %}
 <div class="text-center py-2">
     <small>
