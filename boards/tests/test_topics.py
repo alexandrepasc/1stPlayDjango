@@ -4,7 +4,7 @@ from django.test import TestCase
 from .utils import add_data
 
 
-class TestUrls(TestCase):
+class TestTopics(TestCase):
     path = reverse('board_topics', args=[1])
 
     def setUp(self):
@@ -32,7 +32,7 @@ class TestUrls(TestCase):
         self.assertNotContains(response, 'href="/board/1/new/"'.format(path))
 
     def test_board_topics_list(self):
-        response = self.client.get(path)
+        response = self.client.get(self.path)
         self.assertContains(response, '<td>test1</td>'.format(self.path))
         self.assertContains(response, '<td>test</td>'.format(self.path))
 
