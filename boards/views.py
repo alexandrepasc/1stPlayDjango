@@ -74,7 +74,7 @@ def new_topic(request, pk):
 def topic_(request, pk):
     topic_ = get_object_or_404(Topic, pk=pk)
 
-    posts = Post.objects.get(topic_id=topic_.pk)
+    posts = topic_.posts.all
 
     board = Board.objects.get(pk=topic_.board.pk)
 
