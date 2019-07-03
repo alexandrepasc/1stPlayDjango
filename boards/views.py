@@ -70,13 +70,14 @@ def new_topic(request, pk):
     return render(request, 'newTopic.html', {'board': board, 'form': form})
 
 
+#TODO: check if this can be changed.
 def topic_(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
+    topic_ = get_object_or_404(Topic, pk=pk)
 
-    posts = topic.pk
+    posts = Post.objects.get(topic_id=topic_.pk)
 
-    board = topic.board
+    board = Board.objects.get(pk=topic_.board.pk)
 
     setattr(request, 'view', 'topic')
 
-    return render(request, 'topic.html', {'posts': posts, 'topic': topic, 'board': board})
+    return render(request, 'topic.html', {'posts': posts, 'topic': topic_, 'board': board})
