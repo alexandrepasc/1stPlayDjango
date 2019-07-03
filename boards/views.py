@@ -69,7 +69,7 @@ def new_topic(request, pk):
     return render(request, 'newTopic.html', {'board': board, 'form': form})
 
 
-#TODO: check if this can be changed.
+# TODO: check if this can be changed.
 def topic_(request, pk):
     topic_ = get_object_or_404(Topic, pk=pk)
 
@@ -82,6 +82,12 @@ def topic_(request, pk):
 
     if request.method == 'POST':
         form = NewPostForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.topic = topic_
+            post.created_by = request.user
+            post.save()
 
     else:
         form = NewPostForm()
