@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import redirect, render, get_object_or_404
 
-from .forms import NewTopicForm
+from .forms import NewPostForm, NewTopicForm
 from .models import Board, Topic, Post
 
 
@@ -70,13 +69,27 @@ def new_topic(request, pk):
     return render(request, 'newTopic.html', {'board': board, 'form': form})
 
 
+# TODO: check if this can be changed.
 def topic_(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
+    topic_ = get_object_or_404(Topic, pk=pk)
 
-    posts = topic.pk
+    posts = topic_.posts.all
 
-    board = topic.board
+    board = Board.objects.get(pk=topic_.board.pk)
 
     setattr(request, 'view', 'topic')
+    setattr(request, 'submitName', 'Post')
 
-    return render(request, 'topic.html', {'posts': posts, 'topic': topic, 'board': board})
+    if request.method == 'POST':
+        form = NewPostForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.topic = topic_
+            post.created_by = request.user
+            post.save()
+
+    else:
+        form = NewPostForm()
+
+    return render(request, 'topic.html', {'posts': posts, 'topic': topic_, 'board': board, 'form': form})

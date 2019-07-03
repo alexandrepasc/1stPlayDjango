@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 {{ board.name }}
 {% endblock %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item">Boards</li>
+<li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
 <li class="breadcrumb-item active">{{ board.name }}</li>
 {% endblock %}
 
@@ -25,14 +27,18 @@
     </thead>
     <tbody>
     {% for topic in board.topics.all %}
-    <tr>
-        <td><a href="{% url 'topic_' topic.id %}">{{ topic.subject }}</a></td>
+    <tr class='clickable-row' style="cursor: pointer;" data-href="{% url 'topic_' topic.id %}">
+        <td>{{ topic.subject }}</td>
         <td>{{ topic.starter.username }}</td>
-        <td>0</td>
+        <td>{{ topic.posts.count}}</td>
         <td>0</td>
         <td>{{ topic.last_updated }}</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'js/clickRow.js' %}"></script>
 {% endblock %}
