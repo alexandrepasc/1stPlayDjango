@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 {{ request.breadcrumb }}
 {% endblock %}
@@ -20,9 +22,8 @@
     </thead>
     <tbody>
     {% for board in boards %}
-    <tr>
-        <td>
-            <a href="{% url 'board_topics' board.id%}">{{ board.name }}</a><br>
+    <tr class='clickable-row' style="cursor: pointer;" data-href="{% url 'board_topics' board.id%}">
+        <td>{{ board.name }}<br>
             <small class="text-muted d-block">{{ board.description }}</small>
         </td>
         <td class="align-middle">0</td>
@@ -32,4 +33,8 @@
     {% endfor %}
     </tbody>
 </table>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'js/clickRow.js' %}"></script>
 {% endblock %}
