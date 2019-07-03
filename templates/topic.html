@@ -50,6 +50,7 @@
 <div id="divHide" style="display: none;">
     <form method="post" novalidate>
         {% include 'include/form.html' %}
+        {% include 'include/normalFormButtons.html' %}
         <div style="float: right;">
             <button type="submit" class="btn btn-danger"
                     formaction="{% url 'board_topics' board.id%}">Cancel
